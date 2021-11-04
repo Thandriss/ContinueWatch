@@ -14,7 +14,7 @@ class MainActivityOnSRInstance {
             while (true) {
                 Thread.sleep(1000)
                 textSecondsElapsed.post {
-                    textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
+                    textSecondsElapsed.text = String.format(getString(R.string.seconds), secondsElapsed++)
                 }
             }
         }
@@ -40,7 +40,6 @@ class MainActivityOnSRInstance {
         override fun onSaveInstanceState(outState: Bundle) {
             outState.run { putInt(TAG, secondsElapsed) }
             Log.i(TAG, outState.getInt(TAG).toString())
-            secondsElapsed = outState.getInt(TAG)
             save = outState.getInt(TAG)
             super.onSaveInstanceState(outState)
             Log.i(TAG, "onSaveInstanceState")
@@ -74,7 +73,6 @@ class MainActivityOnSRInstance {
 
         override fun onRestoreInstanceState(savedInstanceState: Bundle) {
             Log.i(TAG, savedInstanceState.getInt(TAG).toString())
-            secondsElapsed = savedInstanceState.getInt(TAG)
             save = savedInstanceState.getInt(TAG)
             super.onRestoreInstanceState(savedInstanceState)
             Log.i(TAG, "onRestoreInstanceState")
